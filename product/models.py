@@ -4,7 +4,7 @@ from PIL import Image
 from django.core.files import File
 from django.db import models
 
-# Para crear las tablas en la Base de Datos
+# Para crear las tablas en la Base de Datos 
 class Category(models.Model):
     name = models.CharField(max_length=255)
     slug = models.SlugField()

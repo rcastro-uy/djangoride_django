@@ -35,7 +35,7 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'/{self.category}/{self.slug}/'
+        return f'/{self.category.slug}/{self.slug}/'
 
     def get_image(self):
         if self.image:
@@ -54,7 +54,7 @@ class Product(models.Model):
             else:
                 return ''
 
-    def make_thumbnail(self, image, size=(300, 200)):
+    def make_thumbnail(self, image, size=(300, 300)):
         img = Image.open(image)
         img.convert('RGB')
         img.thumbnail(size)

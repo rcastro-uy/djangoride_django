@@ -37,16 +37,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
-
-    'product'
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.strava',
+    'product',
+    'order'
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
+    'http://localhost:8000',
+    'http://djangoride.herokuapp.com'
 ]
 
 MIDDLEWARE = [
@@ -136,3 +143,29 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Strava values
+
+SOCIAL_AUTH_STRAVA_KEY = '66719'
+SOCIAL_AUTH_STRAVA_SECRET = 'fe5fc759b4a35a5618ee2936fe16aa711ae78530'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'strava': {
+        'SCOPE': [
+            'profile:read_all',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SITE_ID = 3
+
+LOGIN_REDIRECT_URL = '/cart'
+LOGOUT_REDIRECT_URL = '/'
